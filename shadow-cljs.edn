@@ -1,0 +1,17 @@
+;; shadow-cljs configuration
+{:source-paths
+ ["src/dev"
+  "src/main"
+  "src/test"]
+
+ :dependencies
+ [[cider/cider-nrepl "0.28.5"]
+  [lilactown/helix "0.1.8"]]
+
+ :dev-http {8080 "public"}
+
+ :builds
+ {:app {:target :browser
+        :output-dir "public/js"
+        :asset-path "/js"
+        :modules {:main {:init-fn helix.app/init}}}}}
