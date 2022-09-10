@@ -102,10 +102,10 @@
   []
   (d/section
    (d/h3 "Sally Ride's Packing List")
-   (d/ol
-    ($ item {:name "Space suit" :is-packed? true})
-    ($ item {:name "Helmet with a golden leaf" :is-packed? true})
-    ($ item {:name "Photo of Tam" :is-packed? false}))))
+   (d/ul {:style {:list-style "square"}}
+         ($ item {:name "Space suit" :is-packed? true})
+         ($ item {:name "Helmet with a golden leaf" :is-packed? true})
+         ($ item {:name "Photo of Tam" :is-packed? false}))))
 
 (def people [{:id 0
               :name "Creola Katherine Johnson"
@@ -156,6 +156,7 @@
                (d/option {:value "chemist"} "chemist")
                (d/option {:value "physicist"} "physicist")
                (d/option {:value "astrophysicist"} "astrophysicist"))
-     (d/ul {:style {:list-style "none"
-                    :margin 0
-                    :padding 0}} list-items))))
+     (d/ul ;; {:style {:list-style "none"
+           ;;          :margin 0
+           ;;          :padding 0}}
+      list-items))))

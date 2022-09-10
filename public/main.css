@@ -50,6 +50,9 @@ th[colspan="2"] {
 
 ul {
     width: 80%;
+    list-style: square outside none;
+    padding-left: 0;
+
 }
 
 li {
@@ -61,9 +64,20 @@ label, input {
     margin-right: 5px;
 }
 label {
-
     min-width: 80px;
 }
+
 button {
     margin-right: 5px;
+}
+
+img {
+    margin: 3px;
+    padding: 3px;
+}
+
+span {
+    float: left;
+    width: 300px;
+    word-wrap: break-word;
 }

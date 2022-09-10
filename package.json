@@ -9,5 +9,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-refresh": "^0.14.0"
+  },
+  "scripts": {
+    "start": "shadow-cljs watch app",
+    "build": "shadow-cljs release app"
   }
 }

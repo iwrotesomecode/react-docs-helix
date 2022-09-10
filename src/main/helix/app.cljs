@@ -6,7 +6,8 @@
             [helix.part1 :as p1]
             [helix.part2 :as p2]
             [helix.part3 :as p3]
-            [helix.part4 :as p4]))
+            [helix.part4 :as p4]
+            [helix.part5 :as p5]))
 
 (defnc app
   []
@@ -46,6 +47,11 @@
      ($ p4/counter2)
      (d/br)
      ($ p4/art-form)
+     ($ p4/bucket-list)
+     (d/hr {:size 1 :color "#242424"})
+     ;; Part 5
+     (d/h2  "Part 5: Managing State")
+     ($ p5/part5)
      (d/p ".."))))
 
 (defn ^:export init []
