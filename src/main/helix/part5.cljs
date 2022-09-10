@@ -4,6 +4,7 @@
             [helix.dom :as d]
             ["react" :as react]
             [helix.p5data :refer [places]]
+            [helix.task :as task]
             [goog.string :as gstring]
             [goog.string.format]))
 
@@ -75,7 +76,8 @@
   (let [[editing? set-editing] (hooks/use-state false)
         task-content (if editing?
                        (<>
-                        (d/input {:value (:text task)
+                        (d/input {:type "text"
+                                  :value (:text task)
                                   :on-change #(on-change (assoc task :text (.. % -target -value)))})
                         (d/button {:on-click #(set-editing (not editing?))} "Save"))
                        (<>
@@ -102,9 +104,10 @@
 (defn task-reducer [tasks action]
   (case (:type action)
     :added (conj tasks {:id (:id action) :text (:text action) :done false})
-    :changed (mapv #(if (= ((comp :id :task) action) (:id %))
-                      (:task action)
-                      %) tasks)
+    :changed (->> tasks
+                  (mapv (fn [task] (if (= ((comp :id :task) action) (:id task))
+                                     (:task action)
+                                     task))))
     :deleted (filterv #(not= (:id %) (:id action)) tasks)
     :default (-> (js/Error. (str "Unknown action: " (:type action)))
                  (js/throw))))
@@ -124,7 +127,7 @@
     (<>
      (d/h3 "Itinerář Prahy \u2014 useReducer")
      ;; (d/h4 idx)
-     ;; (d/h4 (prn (.stringify js/JSON (clj->js tasks))))
+     (js/console.log (.stringify js/JSON (clj->js tasks)))
      ($ Add-task {:on-add-task handle-add-task})
      ($ Task-list {:tasks tasks
                    :on-change-task handle-change-task
@@ -143,4 +146,8 @@
   (<>
    (d/h3 "useContext example")
    ($ Murals)
-   ($ Task-app)))
+   (d/hr {:size 1 :color "cornflowerblue"})
+   ($ Task-app)
+   (d/hr {:size 1 :color "cornflowerblue"})
+   ($ task/Task-app)
+   (d/hr {:size 1 :color "cornflowerblue"})))

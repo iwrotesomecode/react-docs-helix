@@ -76,7 +76,7 @@ img {
     padding: 3px;
 }
 
-span {
+label  span, input[type="text"] {
     float: left;
     width: 300px;
     word-wrap: break-word;
