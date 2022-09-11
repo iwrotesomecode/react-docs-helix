@@ -7,7 +7,8 @@
             [helix.part2 :as p2]
             [helix.part3 :as p3]
             [helix.part4 :as p4]
-            [helix.part5 :as p5]))
+            [helix.part5 :as p5]
+            [helix.part6 :as p6]))
 
 (defnc app
   []
@@ -52,7 +53,10 @@
      ;; Part 5
      (d/h2  "Part 5: Managing State")
      ($ p5/part5)
-     (d/p ".."))))
+     (d/hr {:size 1 :color "#242424"})
+     ;; Part 5
+     (d/h2  "Part 6: Escape Hatches")
+     ($ p6/part6))))
 
 (defn ^:export init []
   (let [root (rdom/createRoot (js/document.getElementById "app"))]

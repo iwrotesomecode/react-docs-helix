@@ -2,16 +2,17 @@
              --textsize: 16px;
              --bgcolor: #101010;
              --textcolor: #f0f0f0;
+             --max-width: 650px;
 }
 
-body{max-width:650px;
-             margin:40px auto;
-             padding:0 10px;
-             font: var(--textsize)/1.35 system-ui, sans-serif;
-             color: var(--textcolor);
-             background: var(--bgcolor);
-         }
-h1,h2,h3{line-height:1.2}
+body { max-width: var(--max-width);
+       margin:40px auto;
+       padding:0 10px;
+       font: var(--textsize)/1.35 system-ui, sans-serif;
+       color: var(--textcolor);
+       background: var(--bgcolor);
+}
+h1,h2,h3 {line-height:1.2}
 
 h2 {
     color: thistle;
@@ -68,7 +69,7 @@ label {
 }
 
 button {
-    margin-right: 5px;
+    margin: 5px 5px 5px 0px;
 }
 
 img {
@@ -80,4 +81,9 @@ label  span, input[type="text"] {
     float: left;
     width: 300px;
     word-wrap: break-word;
+}
+
+video {
+    max-width: var(--max-width);
+    border-radius: 5px;
 }
