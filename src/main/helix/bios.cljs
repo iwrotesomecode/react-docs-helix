@@ -26,16 +26,16 @@
      [person]
      (set-bio nil)
      (-> p (p/then #(set-bio %))))
-    (<>
-     (d/p {:style {:color "gray"}} "This simulated API call example has a race condition. Selecting Taylor then Bob quickly enough results in Bob being selected and Taylor's bio being displayed.")
-     (d/select {:value person
-                :on-change #(set-person (.. % -target -value))}
-               (d/option {:value "Alice"} "Alice")
-               (d/option {:value "Taylor"} "Taylor")
-               (d/option {:value "Bob"} "Bob"))
-     (d/hr {:color "salmon"})
-     (d/p
-      (d/i {:style {:color "salmon"}} (or bio "Loading..."))))))
+    (d/div {:class "race"}
+           (d/p "This simulated API call example has a race condition. Selecting Taylor then Bob quickly enough results in Bob being selected and Taylor's bio being displayed.")
+           (d/select {:value person
+                      :on-change #(set-person (.. % -target -value))}
+                     (d/option {:value "Alice"} "Alice")
+                     (d/option {:value "Taylor"} "Taylor")
+                     (d/option {:value "Bob"} "Bob"))
+           (d/hr {:color "red"})
+           (d/p
+            (d/i {:style {:color "red"}} (or bio "Loading..."))))))
 
 (defnc page-2
   []
@@ -47,15 +47,15 @@
      (let [ignore? (atom false)]
        (set-bio nil)
        (-> p (p/then #(when (not @ignore?) (set-bio %))))
-     ;; return/cleanup command
+       ;; return/cleanup command
        #(reset! ignore? true)))
-    (<>
-     (d/p {:style {:color "gray"}} "The race condition is fixed here with a cleanup function on useEffect, preventing state from being set from the return of an outdated API call.")
-     (d/select {:value person
-                :on-change #(set-person (.. % -target -value))}
-               (d/option {:value "Alice"} "Alice")
-               (d/option {:value "Taylor"} "Taylor")
-               (d/option {:value "Bob"} "Bob"))
-     (d/hr {:color "lightgreen"})
-     (d/p
-      (d/i {:style {:color "lightgreen"}} (or bio "Loading..."))))))
+    (d/div {:class "race"}
+           (d/p "The race condition is fixed here with a cleanup function on useEffect, preventing state from being set from the return of an outdated API call.")
+           (d/select {:value person
+                      :on-change #(set-person (.. % -target -value))}
+                     (d/option {:value "Alice"} "Alice")
+                     (d/option {:value "Taylor"} "Taylor")
+                     (d/option {:value "Bob"} "Bob"))
+           (d/hr {:color "green"})
+           (d/p
+            (d/i {:style {:color "green"}} (or bio "Loading..."))))))

@@ -11,10 +11,11 @@
 
 (defnc shopping-list
   []
-  (for [item products]
-    (d/li {:key (:id item)
-           :style {:color (if (:is-fruit item) "magenta" "cyan")}}
-          (:title item))))
+  (d/ul
+   (for [item products]
+     (d/li {:key (:id item)
+            :style {:color (if (:is-fruit item) "magenta" "darkgreen")}}
+           (:title item)))))
 
 (def user {:name "Hedy Lamar"
            :imageURL "https://i.imgur.com/yXOvdOSs.jpg"

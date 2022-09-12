@@ -1,7 +1,7 @@
 * {
              --textsize: 16px;
-             --bgcolor: #101010;
-             --textcolor: #f0f0f0;
+             --textcolor: #101010;
+             --bgcolor: #f0f0f0;
              --max-width: 650px;
 }
 
@@ -14,9 +14,6 @@ body { max-width: var(--max-width);
 }
 h1,h2,h3 {line-height:1.2}
 
-h2 {
-    color: thistle;
-}
 h3 {
     color: gray;
 }
@@ -53,7 +50,6 @@ ul {
     width: 80%;
     list-style: square outside none;
     padding-left: 0;
-
 }
 
 li {
@@ -69,7 +65,8 @@ label {
 }
 
 button {
-    margin: 5px 5px 5px 0px;
+    margin: 5px;
+    margin-left: 0;
 }
 
 img {
@@ -86,7 +83,7 @@ label  span, input[type="text"] {
 video {
     max-width: var(--max-width);
     border-radius: 5px;
-    margin: 5px 0 5px 0;
+    margin: 5px 0;
 }
 
 .container {
@@ -95,5 +92,12 @@ video {
 }
 
 .active {
-    border: 2px solid darkslategray;
+    border: 5px solid lightcyan;
+    margin-left: 0;
+}
+.race {
+    border: 1px solid  lightgray;
+    padding: 20px;
+    margin: 20px 0;
+    background: #f4f4f4;
 }

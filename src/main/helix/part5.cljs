@@ -53,7 +53,7 @@
                                    :checked largesse?
                                    :on-change #(set-largesse (.. % -target -checked))})
                          (d/label {:for "largesse"} "Use large images")
-                         (d/hr {:size 1 :color "cornflowerblue"})
+                         (d/hr {:size 1 :color "lightgray"})
                          ($ Mural-list))))
 
 ;; Combining reducer with context
@@ -146,8 +146,8 @@
   (<>
    (d/h3 "useContext example")
    ($ Murals)
-   (d/hr {:size 1 :color "cornflowerblue"})
+   (d/hr {:size 1 :color "lightgray"})
    ($ Task-app)
-   (d/hr {:size 1 :color "cornflowerblue"})
+   (d/hr {:size 1 :color "lightgray"})
    ($ task/Task-app)
-   (d/hr {:size 1 :color "cornflowerblue"})))
+   (d/hr {:size 1 :color "lightgray"})))

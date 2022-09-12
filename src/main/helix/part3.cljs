@@ -29,7 +29,9 @@
 
 (def person {:name "Gregorio Y. Zara"
              :theme {:background-color "#1d1d1d"
-                     :color "pink"}})
+                     :color "pink"
+                     :padding "30px"
+                     :border-radius "20px"}})
 (defnc todolist
   []
   (d/div {:style (:theme person)}
@@ -102,10 +104,10 @@
   []
   (d/section
    (d/h3 "Sally Ride's Packing List")
-   (d/ul {:style {:list-style "square"}}
-         ($ item {:name "Space suit" :is-packed? true})
-         ($ item {:name "Helmet with a golden leaf" :is-packed? true})
-         ($ item {:name "Photo of Tam" :is-packed? false}))))
+   (d/ul
+    ($ item {:name "Space suit" :is-packed? true})
+    ($ item {:name "Helmet with a golden leaf" :is-packed? true})
+    ($ item {:name "Photo of Tam" :is-packed? false}))))
 
 (def people [{:id 0
               :name "Creola Katherine Johnson"

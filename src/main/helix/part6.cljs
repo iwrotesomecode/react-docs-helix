@@ -59,13 +59,10 @@
                                (set-idx inc)
                                (set-idx 0)))
                        (.scrollIntoView @selected-ref {:behavior "smooth"
-                                                       :block "nearest"
-                                                       :inline "center"}))]
+                                                       :block "nearest"}))]
     (<>
-     (d/p {:style {:color "gray"}} "Use react-dom/flushSync to force React to update DOM on button click before the ref is 'scrollIntoView.'")
-     (d/nav
-      (d/button {:on-click handle-click}
-                "Next cat"))
+     (d/p {:id "cat"
+           :style {:color "gray"}} "Use react-dom/flushSync to force React to update DOM on button click before the ref is 'scrollIntoView.'")
      (d/div {:class "container"}
             (d/ul
              (->> cat-list
@@ -74,7 +71,10 @@
                                         :ref (if (= i idx) selected-ref nil)}
                                        (d/img {:class (if (= idx i) "active" "")
                                                :src (:image-url cat)
-                                               :alt (str "Cat #" (:id cat))}))))))))))
+                                               :alt (str "Cat #" (:id cat))})))))))
+     (d/nav
+      (d/button {:on-click handle-click}
+                "Next cat")))))
 
 (defnc video-player
   [{:keys [src playing?]}]
@@ -109,5 +109,8 @@
    (d/br)
    ($ video-app)
    ($ cat-friends)
+   (d/hr {:color "lightgray"})
+   (d/h3 "useEffect, stale data, race conditions")
    ($ bios/page-1)
-   ($ bios/page-2)))
+   ($ bios/page-2)
+   (d/hr {:color "lightgray"})))
