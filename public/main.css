@@ -86,4 +86,14 @@ label  span, input[type="text"] {
 video {
     max-width: var(--max-width);
     border-radius: 5px;
+    margin: 5px 0 5px 0;
+}
+
+.container {
+    height: 220px;
+    overflow-y: scroll;
+}
+
+.active {
+    border: 2px solid darkslategray;
 }

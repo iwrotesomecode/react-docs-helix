@@ -2,7 +2,9 @@
   (:require [helix.core :refer [defnc $ <>]]
             [helix.hooks :as hooks]
             [helix.dom :as d]
-            ["react" :as react]))
+            ["react" :as react]
+            ["react-dom" :as rdom]
+            [helix.bios :as bios]))
 ;;(.. js/object -prop1 -prop2 -prop3) ;; JS output: object.prop1.prop2.prop3;
 
 ;; (.. object -property -property method)
@@ -10,6 +12,21 @@
 ;;          Instead of:
 ;; (.method (.-property (.-property object)))
 ;; (.-property (.-property (.-property object)))
+
+;; forward-ref test
+
+(defnc my-input
+  [props ref]
+  {:wrap [(react/forwardRef)]}
+  (d/input {:ref ref :& props}))
+
+(defnc my-form
+  []
+  (let [input-ref (hooks/use-ref nil)
+        handle-click #(.focus @input-ref)]
+    (<>
+     ($ my-input {:ref input-ref})
+     (d/button {:on-click handle-click} "Focus the input"))))
 
 (defnc stopwatch
   []
@@ -30,13 +47,42 @@
      (d/button {:on-click handle-start} "Start")
      (d/button {:on-click handle-stop} "Stop"))))
 
+(defnc cat-friends
+  []
+  (let [[idx set-idx] (hooks/use-state 0)
+        cat-list (for [x (range 10)]
+                   {:id x
+                    :image-url (str "https://placekitten.com/250/200?image=" x)})
+        selected-ref (hooks/use-ref nil)
+        handle-click (fn [] (rdom/flushSync
+                             (if (< idx (dec (count cat-list)))
+                               (set-idx inc)
+                               (set-idx 0)))
+                       (.scrollIntoView @selected-ref {:behavior "smooth"
+                                                       :block "nearest"
+                                                       :inline "center"}))]
+    (<>
+     (d/p {:style {:color "gray"}} "Use react-dom/flushSync to force React to update DOM on button click before the ref is 'scrollIntoView.'")
+     (d/nav
+      (d/button {:on-click handle-click}
+                "Next cat"))
+     (d/div {:class "container"}
+            (d/ul
+             (->> cat-list
+                  (map-indexed (fn [i cat]
+                                 (d/li {:key (:id cat)
+                                        :ref (if (= i idx) selected-ref nil)}
+                                       (d/img {:class (if (= idx i) "active" "")
+                                               :src (:image-url cat)
+                                               :alt (str "Cat #" (:id cat))}))))))))))
+
 (defnc video-player
   [{:keys [src playing?]}]
   (let [ref (hooks/use-ref nil)]
     (hooks/use-effect
-     :auto-deps
+     :auto-deps ;; [playing?]
      (if playing?
-       (.play @ref) ;; (.. @ref -current play)
+       (.play @ref) ;; (.. ref -current play)
        (.pause @ref)))
     (d/video {:ref ref
               :src src
@@ -58,5 +104,10 @@
   (<>
    (d/p "Escape Artists \u2014 useRef, useEffect")
    ($ stopwatch)
+   (d/p "forwardRef")
+   ($ my-form)
    (d/br)
-   ($ video-app)))
+   ($ video-app)
+   ($ cat-friends)
+   ($ bios/page-1)
+   ($ bios/page-2)))
