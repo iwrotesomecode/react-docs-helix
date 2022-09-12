@@ -6,7 +6,8 @@
 
  :dependencies
  [[cider/cider-nrepl "0.28.5"]
-  [lilactown/helix "0.1.8"]]
+  [lilactown/helix "0.1.8"]
+  [funcool/promesa "8.0.446"]]
 
  :dev-http {8080 "public"}
 
