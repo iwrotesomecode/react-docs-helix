@@ -56,11 +56,19 @@
        (d/th "Name")
        (d/th "Price")))
      (d/tbody
-      (for [[group data] groups]
-        (<>
-         ($ product-category-row {:category group :key group})
-         (for [row data]
-           ($ product-row {:data row :key (:name row)}))))))))
+      (mapcat
+       (fn [[group data]]
+         (cons
+          ($ product-category-row {:category group :key group})
+          (for [row data]
+            ($ product-row {:data row :key (:name row)}))))
+       groups)))))
+ ;; this originally below tbody, lilactown's version above.
+ ;; (for [[group data] groups]
+ ;;        (<> {:key group}  ;; key should go on <>
+ ;;            ($ product-category-row {:category group})
+ ;;            (for [row data]
+ ;;              ($ product-row {:data row :key (:name row)}))))))))
 
 (defnc filterable-product-table
   [{:keys [products]}]
