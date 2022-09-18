@@ -56,10 +56,12 @@
                          (d/hr {:size 1 :color "lightgray"})
                          ($ Mural-list))))
 
-;; Combining reducer with context
 (def initial-tasks [{:id 0 :text "Navštivte Kafkovo muzeum" :done true}
                     {:id 1 :text "Podívejte se na loutkové představení" :done false}
                     {:id 2 :text "Fotografie Lennonova zdi" :done false}])
+;; (def initial-tasks [{:id 0 :text "Visit Kafka Museum" :done true}
+;;                     {:id 1 :text "Watch a puppet show" :done false}
+;;                     {:id 2 :text "Lennon Wall pic" :done false}])
 
 (defnc Add-task
   [{:keys [on-add-task]}]
@@ -109,8 +111,8 @@
                                      (:task action)
                                      task))))
     :deleted (filterv #(not= (:id %) (:id action)) tasks)
-    :default (-> (js/Error. (str "Unknown action: " (:type action)))
-                 (js/throw))))
+    :default (-> (str "Unknown action: " (:type action))
+                 throw)))
 
 (defnc Task-app
   []
@@ -126,6 +128,7 @@
                                                :id id}))]
     (<>
      (d/h3 "Itinerář Prahy \u2014 useReducer")
+     ;; (d/h3 "Prague Itinerary (useReducer)")
      ;; (d/h4 idx)
      (js/console.log (.stringify js/JSON (clj->js tasks)))
      ($ Add-task {:on-add-task handle-add-task})

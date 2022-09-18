@@ -162,3 +162,13 @@
            ;;          :margin 0
            ;;          :padding 0}}
       list-items))))
+
+(defnc part3
+  []
+  (<>
+   ($ gallery)
+   ($ todolist)
+   ($ today-todo)
+   ($ profile-card)
+   ($ packing-list)
+   ($ sci-list)))

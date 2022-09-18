@@ -7,6 +7,9 @@
 (def initial-tasks [{:id 0 :text "哲学者の道" :done false}
                     {:id 1 :text "神殿を訪れる" :done false}
                     {:id 2 :text "ドリンク抹茶" :done true}])
+;; (def initial-tasks [{:id 0 :text "Philosopher's Path" :done false}
+;;                     {:id 1 :text "Visit the temple" :done false}
+;;                     {:id 2 :text "Drink matcha" :done true}])
 
 (def task-context (react/createContext nil))
 (def task-dispatch-context (react/createContext nil))
@@ -68,13 +71,14 @@
                                      task))))
     :deleted (filterv #(not= (:id %) (:id action)) tasks)
     :default (-> (js/Error. (str "Unknown action: " (:type action)))
-                 (js/throw))))
+                 (throw))))
 
 (defnc Task-app
   []
   (let [[tasks dispatch] (hooks/use-reducer task-reducer initial-tasks)]
     (->> (<>
           (d/h3 "京都の休日 \u2014 useReducer and useContext")
+          ;; (d/h3 "Day off in Kyoto (useReducer and useContext)")
           (js/console.log (.stringify js/JSON (clj->js tasks)))
           ($ Add-task)
           ($ Task-list))

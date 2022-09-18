@@ -123,3 +123,11 @@
      ($ item-list {:artwork your-list
                    :on-toggle handle-toggle-your-list}))))
 
+(defnc part4
+  []
+  (<>
+   ($ counter1)
+   ($ counter2)
+   (d/br)
+   ($ art-form)
+   ($ bucket-list)))

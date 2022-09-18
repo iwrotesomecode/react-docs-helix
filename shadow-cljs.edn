@@ -1,4 +1,3 @@
-;; shadow-cljs configuration
 {:source-paths
  ["src/dev"
   "src/main"
@@ -13,6 +12,8 @@
 
  :builds
  {:app {:target :browser
+        :compiler-options {:output-feature-set :es6}
+        ;;:build-hooks [(debug/find-it)]
         :output-dir "public/js"
         :asset-path "/js"
         :modules {:main {:init-fn helix.app/init}}}}}

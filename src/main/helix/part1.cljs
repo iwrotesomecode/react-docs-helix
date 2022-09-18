@@ -1,5 +1,6 @@
 (ns helix.part1
   (:require [helix.core :refer [defnc $ <>]]
+            [helix.hooks :as hooks]
             [helix.dom :as d]))
 
 ;;; Quick Start
@@ -35,3 +36,14 @@
   [{:keys [count on-click]}]
   (d/button {:on-click on-click}
             (str "Clicked " count " times")))
+
+(defnc part1
+  []
+  (let [[count, set-count] (hooks/use-state 0)
+        handle-click #(set-count inc)]
+    (<>
+     ;; state lifted out of count and shared btwn buttons
+     ($ my-button {:count count :on-click handle-click})
+     ($ my-button {:count count :on-click handle-click})
+     ($ profile)
+     ($ shopping-list))))
